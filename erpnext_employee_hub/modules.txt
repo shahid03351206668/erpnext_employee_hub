@@ -1,2 +1,1 @@
-ERPNext  Employee Hub
 ERPNext Employee Hub

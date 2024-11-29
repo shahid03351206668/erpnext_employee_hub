@@ -1,6 +1,6 @@
 app_name = "erpnext_employee_hub"
-app_title = "ERPNext  Employee Hub"
-app_publisher = "CodesSoft"
+app_title = "ERPNext Employee Hub"
+app_publisher = "Codes Soft"
 app_description = "ERPNext Employee Hub"
 app_email = "salman@codessoft.com"
 app_license = "mit"
@@ -15,7 +15,7 @@ app_license = "mit"
 # 	{
 # 		"name": "erpnext_employee_hub",
 # 		"logo": "/assets/erpnext_employee_hub/logo.png",
-# 		"title": "ERPNext  Employee Hub",
+# 		"title": "ERPNext Employee Hub",
 # 		"route": "/erpnext_employee_hub",
 # 		"has_permission": "erpnext_employee_hub.api.permission.has_app_permission"
 # 	}
@@ -242,3 +242,6 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+{'dt': 'Custom Field', 'filters': { 'module': ['in', [ 'ERPNext Employee Hub']]}},
+]

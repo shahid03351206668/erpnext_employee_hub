@@ -2,7 +2,7 @@ app_name = "erpnext_employee_hub"
 app_title = "ERPNext Employee Hub"
 app_publisher = "Codes Soft"
 app_description = "ERPNext Employee Hub"
-app_email = "salman@codessoft.com"
+app_email = "info@codessoft.com"
 app_license = "mit"
 
 # Apps

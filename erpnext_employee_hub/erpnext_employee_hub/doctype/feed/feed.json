@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-11-28 13:54:40.420243",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "post_type",
+  "posted_time",
+  "post_title",
+  "column_break_wxfq",
+  "number_of_likes",
+  "number_of_comments",
+  "list_of_comments",
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "fieldname": "post_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Post Type",
+   "options": "Post Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "posted_time",
+   "fieldtype": "Time",
+   "label": "Posted Time"
+  },
+  {
+   "fieldname": "post_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Post Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wxfq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "number_of_likes",
+   "fieldtype": "Data",
+   "label": "Number of Likes"
+  },
+  {
+   "fieldname": "number_of_comments",
+   "fieldtype": "Data",
+   "label": "Number of Comments"
+  },
+  {
+   "fieldname": "list_of_comments",
+   "fieldtype": "Data",
+   "label": "List of Comments"
+  },
+  {
+   "default": "F-",
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Naming Series",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-28 17:15:50.229090",
+ "modified_by": "Administrator",
+ "module": "ERPNext Employee Hub",
+ "name": "Feed",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

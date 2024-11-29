@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-11-28 15:05:05.386228",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "poll_options",
+  "question",
+  "answer",
+  "expiry_date",
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "fieldname": "poll_options",
+   "fieldtype": "Table",
+   "label": "Poll Options",
+   "options": "Poll Options"
+  },
+  {
+   "fieldname": "question",
+   "fieldtype": "Small Text",
+   "label": "Question"
+  },
+  {
+   "fieldname": "answer",
+   "fieldtype": "Small Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "expiry date"
+  },
+  {
+   "default": "P-",
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Naming Series",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-28 17:15:51.660140",
+ "modified_by": "Administrator",
+ "module": "ERPNext Employee Hub",
+ "name": "Poll",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

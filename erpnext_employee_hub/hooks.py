@@ -243,5 +243,6 @@ app_license = "mit"
 # }
 
 fixtures = [
-{'dt': 'Custom Field', 'filters': { 'module': ['in', [ 'ERPNext Employee Hub']]}},
+    {'dt': 'Custom Field', 'filters': { 'module': ['in', [ 'ERPNext Employee Hub']]}},
+    {'dt': 'Workspace', 'filters': { 'module': ['in', [ 'ERPNext Employee Hub']]}},
 ]

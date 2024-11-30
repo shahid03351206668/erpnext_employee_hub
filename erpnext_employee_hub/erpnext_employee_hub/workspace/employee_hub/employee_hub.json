@@ -1,0 +1,53 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"7DdgdP2hdM\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Employee Hub</span>\",\"col\":12}},{\"id\":\"cUzjG_-KDp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Checkin\",\"col\":4}},{\"id\":\"D5lyVNRfjV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Attendance\",\"col\":4}},{\"id\":\"EVi8LjDqwh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Attendance Location\",\"col\":4}}]",
+ "creation": "2024-11-30 18:51:08.060029",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "share",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Employee Hub",
+ "links": [],
+ "modified": "2024-11-30 19:08:04.440957",
+ "modified_by": "Administrator",
+ "module": "ERPNext Employee Hub",
+ "name": "Employee Hub",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 39.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Employee Checkin",
+   "link_to": "Employee Checkin",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Attendance Location",
+   "link_to": "Attendance Location",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Employee Attendance",
+   "link_to": "employee-attendance",
+   "type": "Page"
+  }
+ ],
+ "title": "Employee Hub"
+}

@@ -1,37 +1,61 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "naming_series:",
  "creation": "2024-11-28 15:01:36.824544",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "title",
-  "content",
-  "user"
+  "user",
+  "column_break_lkew",
+  "content"
  ],
  "fields": [
   {
    "fieldname": "title",
    "fieldtype": "Data",
-   "label": "Title"
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
   },
   {
    "fieldname": "content",
    "fieldtype": "Long Text",
-   "label": "Content"
+   "in_list_view": 1,
+   "label": "Content",
+   "reqd": 1
   },
   {
    "fieldname": "user",
-   "fieldtype": "Data",
-   "label": "user"
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "User",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "default": "FP-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "FP-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_lkew",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-28 17:15:50.974513",
+ "modified": "2024-11-30 22:42:48.781054",
  "modified_by": "Administrator",
  "module": "ERPNext Employee Hub",
  "name": "Feed Post",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

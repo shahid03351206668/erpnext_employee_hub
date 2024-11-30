@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"7DdgdP2hdM\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Employee Hub</span>\",\"col\":12}},{\"id\":\"cUzjG_-KDp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Checkin\",\"col\":4}},{\"id\":\"D5lyVNRfjV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Attendance\",\"col\":4}},{\"id\":\"EVi8LjDqwh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Attendance Location\",\"col\":4}}]",
+ "content": "[{\"id\":\"7DdgdP2hdM\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">ERPNext Employee Hub</span>\",\"col\":12}},{\"id\":\"cUzjG_-KDp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Checkin\",\"col\":4}},{\"id\":\"D5lyVNRfjV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Attendance\",\"col\":4}},{\"id\":\"EVi8LjDqwh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Attendance Location\",\"col\":4}},{\"id\":\"390PISP1JX\",\"type\":\"card\",\"data\":{\"card_name\":\"Documents\",\"col\":4}}]",
  "creation": "2024-11-30 18:51:08.060029",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,8 +12,68 @@
  "indicator_color": "",
  "is_hidden": 0,
  "label": "Employee Hub",
- "links": [],
- "modified": "2024-11-30 19:08:04.440957",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Documents",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Feed Post",
+   "link_count": 0,
+   "link_to": "Feed Post",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Feed",
+   "link_count": 0,
+   "link_to": "Feed",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Poll",
+   "link_count": 0,
+   "link_to": "Poll",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Poll Vote",
+   "link_count": 0,
+   "link_to": "Poll Vote",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Post Type",
+   "link_count": 0,
+   "link_to": "Post Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-11-30 22:52:41.111118",
  "modified_by": "Administrator",
  "module": "ERPNext Employee Hub",
  "name": "Employee Hub",

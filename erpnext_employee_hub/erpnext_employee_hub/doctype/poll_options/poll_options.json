@@ -14,19 +14,22 @@
    "fieldname": "option",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Option"
+   "label": "Option",
+   "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "count",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Count"
+   "label": "Count",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-11-28 17:15:49.974918",
+ "modified": "2024-11-30 22:41:09.618177",
  "modified_by": "Administrator",
  "module": "ERPNext Employee Hub",
  "name": "Poll Options",

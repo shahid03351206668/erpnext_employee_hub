@@ -6,49 +6,66 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "poll_options",
+  "naming_series",
+  "expiry_date",
   "question",
   "answer",
-  "expiry_date",
-  "naming_series"
+  "column_break_en0b",
+  "poll_options"
  ],
  "fields": [
   {
    "fieldname": "poll_options",
    "fieldtype": "Table",
    "label": "Poll Options",
-   "options": "Poll Options"
+   "options": "Poll Options",
+   "reqd": 1
   },
   {
    "fieldname": "question",
    "fieldtype": "Small Text",
-   "label": "Question"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Question",
+   "reqd": 1
   },
   {
    "fieldname": "answer",
    "fieldtype": "Small Text",
-   "label": "Answer"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Answer",
+   "reqd": 1
   },
   {
    "fieldname": "expiry_date",
    "fieldtype": "Date",
-   "label": "expiry date"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Expiry Date"
   },
   {
    "default": "P-",
    "fieldname": "naming_series",
-   "fieldtype": "Data",
+   "fieldtype": "Select",
    "hidden": 1,
    "label": "Naming Series",
-   "read_only": 1
+   "options": "P-",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_en0b",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-28 17:15:51.660140",
+ "modified": "2024-11-30 22:40:30.761273",
  "modified_by": "Administrator",
  "module": "ERPNext Employee Hub",
  "name": "Poll",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

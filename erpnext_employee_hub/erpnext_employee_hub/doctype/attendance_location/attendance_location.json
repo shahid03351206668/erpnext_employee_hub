@@ -6,14 +6,17 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "location_details_section",
   "location_name",
   "longitude",
-  "employee",
-  "branch",
-  "get_employees",
   "column_break_ossa",
   "latitude",
   "meters",
+  "filters_section",
+  "employee",
+  "branch",
+  "get_employees",
+  "column_break_fmzo",
   "designation",
   "department",
   "section_break_dlgq",
@@ -62,9 +65,11 @@
    "reqd": 1
   },
   {
+   "default": "99999",
    "fieldname": "meters",
    "fieldtype": "Float",
-   "label": "Meters"
+   "label": "Meters",
+   "reqd": 1
   },
   {
    "fieldname": "designation",
@@ -85,12 +90,27 @@
   {
    "fieldname": "item",
    "fieldtype": "Table",
+   "label": "Employees",
    "options": "Attendance Location Employee"
+  },
+  {
+   "fieldname": "location_details_section",
+   "fieldtype": "Section Break",
+   "label": "Location Details"
+  },
+  {
+   "fieldname": "filters_section",
+   "fieldtype": "Section Break",
+   "label": "Filters"
+  },
+  {
+   "fieldname": "column_break_fmzo",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-28 17:15:51.290568",
+ "modified": "2024-11-30 22:44:59.993589",
  "modified_by": "Administrator",
  "module": "ERPNext Employee Hub",
  "name": "Attendance Location",

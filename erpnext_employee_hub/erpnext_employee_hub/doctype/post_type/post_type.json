@@ -1,26 +1,31 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:post_type",
  "creation": "2024-11-28 13:58:50.401795",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "post"
+  "post_type"
  ],
  "fields": [
   {
-   "fieldname": "post",
+   "fieldname": "post_type",
    "fieldtype": "Data",
-   "label": "Post",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Post Type",
+   "reqd": 1,
    "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-28 17:15:50.489840",
+ "modified": "2024-11-30 22:46:13.451047",
  "modified_by": "Administrator",
  "module": "ERPNext Employee Hub",
  "name": "Post Type",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

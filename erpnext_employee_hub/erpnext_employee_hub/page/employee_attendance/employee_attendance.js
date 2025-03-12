@@ -38,7 +38,7 @@ function view_image(element) {
 			auto;display: block;object-fit: contain;">
 	</div>
 </div>
-	`,)
+	`,"Images")
 }
 
 function view_location(element) {
@@ -161,12 +161,11 @@ function generate_employee_wise_table_rows(data, max_calls, show_images = false)
 			<div class="checkin-employeeCard">
 				<img src="${image || 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'}">
 				<div >
-				<div style="font-weight:700; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;; ">${employee_name}</div>
-				
-				<div style="font-size:.75rem; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;;">${row.date}</div>
-				<div style="font-size:.75rem; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;;">${designation}</div>
-				<div style="font-size:.75rem; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;;">${department}</div>
-				<div style="font-size:.75rem; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;;">${branch}</div>
+				<div style="font-weight:700; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;; ">${employee_name || ""}</div>
+				<div style="font-size:.75rem; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;;">${row.date || ""}</div>
+				<div style="font-size:.75rem; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;;">${designation || ""}</div>
+				<div style="font-size:.75rem; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;;">${department || ""}</div>
+				<div style="font-size:.75rem; text-overflow:ellipsis; width:160px; overflow:hidden;white-space:nowrap;;">${branch || ""}</div>
 				</div>
 			</div>
 		</td>`;
@@ -217,13 +216,13 @@ function generate_checkin_card(i, showImages = true) {
 			<div class="checkin-logCard__upper">
 				<div class="checkin-logCard__title">CHECK ${i.log_type}</div>
 				<div style="display:flex;    gap: .5rem;">
-					<div class="checkin-logCard__time"><b>Date</b>: ${i.checkin_date}</div>
-					<div class="checkin-logCard__time"><b>Time</b>: ${i.checkin_time}</div>
+					<div class="checkin-logCard__time"><b>Date</b>: ${i.checkin_date || ""}</div>
+					<div class="checkin-logCard__time"><b>Time</b>: ${i.checkin_time || ""}</div>
 				</div>
 
-				<div class="checkin-logCard__shift"><b>Shift</b>: ${i.shift}</div>
+				<div class="checkin-logCard__shift"><b>Shift</b>: ${i.shift || ""}</div>
 				<div><b>Location Name</b>: ${i.location_name || ""}</div>
-				<div style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"><b>Location</b>: ${i.device_id}</div>
+				<div style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"><b>Location</b>: ${i.device_id || ""}</div>
 				${i.duration ? `<div><b>Duration:</b> ${i.duration}</div>` : ""}
 			</div>
 			<div style="display:flex;    gap: .5rem; ">
@@ -237,13 +236,10 @@ function generate_checkin_card(i, showImages = true) {
 					data-checkin='${JSON.stringify(i)}'>View Location</button>
 			</div>
 		</div>
-
 		<div>
 		${imageshtml}
 		</div>
-	</div>
-	
-	`
+	</div>`
 
 }
 
@@ -257,7 +253,6 @@ function generate_checkin_card(i, showImages = true) {
 // 			<div style="max-height: 40px;overflow: hidden;"><b>Location / Device ID</b>: ${i.device_id}</div>
 // 			${i.duration ? `<div><b>Duration:</b> ${i.duration}</div>` : ""}
 // 		</div>
-
 // 		<div class="checkin-logCard__images">
 // 			${i.custom_front_image ? `<div><img onclick="view_image('${i.custom_front_image}', 'Front Image')"
 // 					src="${i.custom_front_image}"></div>` : ""}
@@ -269,5 +264,4 @@ function generate_checkin_card(i, showImages = true) {
 // 				data-checkin='${JSON.stringify(i)}'>View Location</button>
 // 		</div>
 // 	</div>`
-
 // }

@@ -1,0 +1,42 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-04-30 18:42:43.107690",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "mandatory_images"
+ ],
+ "fields": [
+  {
+   "default": "Front & Back",
+   "fieldname": "mandatory_images",
+   "fieldtype": "Select",
+   "label": "Mandatory Images",
+   "options": "Front & Back\nFront\nBack"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-04-30 18:53:46.121430",
+ "modified_by": "Administrator",
+ "module": "ERPNext Employee Hub",
+ "name": "ERPNext Employee Hub Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

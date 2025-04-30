@@ -11,7 +11,7 @@ from frappe.utils import (
     add_days,
     nowdate,
 )
-from hrms.hr.doctype.leave_application.leave_application import (
+from erpnext.hr.doctype.leave_application.leave_application import (
     get_leaves_pending_approval_for_period,
     get_leave_allocation_records,
     get_allocation_expiry_for_cf_leaves,

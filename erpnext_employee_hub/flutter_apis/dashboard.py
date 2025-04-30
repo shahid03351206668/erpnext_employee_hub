@@ -1,17 +1,13 @@
-import frappe
 import calendar
 from calendar import monthrange
-
 from datetime import datetime
-from frappe.utils import cstr, cint, flt, getdate
-from .main import (
-    create_log,
-    make_response,
-    get_user_details,
-    get_date_time_to_use,
-)
-from .leave_application_custom import get_leave_details
 from json import loads
+
+import frappe
+from frappe.utils import cint, cstr, flt, getdate
+
+from .leave_application_custom import get_leave_details
+from .main import create_log, get_date_time_to_use, get_user_details, make_response
 
 
 def get_attendance_data(employee, st_date, ed_date):
@@ -174,6 +170,12 @@ def get_dashboard_data():
                 )[1],
             }
 
+            mandatory_images = frappe.db.get_value(
+                "ERPNext Employee Hub Settings", "ERPNext Employee Hub Settings", "mandatory_images"
+            )
+
+            data_get_dict["attendance_mandatory_images"] = mandatory_images
+
             current_shift = frappe.db.sql(
                 f"""  SELECT start_time, end_time,name  FROM `tabShift Type` where name = '{frappe.db.get_value("Employee",user_details.get("employee"), "default_shift")}' """,
                 as_dict=True,
@@ -200,7 +202,7 @@ def get_dashboard_data():
                     frappe.utils.get_last_day(frappe.utils.getdate()),
                 )
             )
-            data_get_dict["attendence_graph_data"] = graph_data
+            data_get_dict["attandence_graph_data"] = graph_data
             make_response(success=True, data=data_get_dict)
         else:
             make_response(success=False, message="Invalid User!")

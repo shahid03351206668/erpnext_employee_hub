@@ -171,7 +171,9 @@ def get_dashboard_data():
             }
 
             mandatory_images = frappe.db.get_value(
-                "ERPNext Employee Hub Settings", "ERPNext Employee Hub Settings", "mandatory_images"
+                "ERPNext Employee Hub Settings",
+                "ERPNext Employee Hub Settings",
+                "mandatory_images",
             )
 
             data_get_dict["attendance_mandatory_images"] = mandatory_images
@@ -207,4 +209,5 @@ def get_dashboard_data():
         else:
             make_response(success=False, message="Invalid User!")
     except Exception as e:
+        frappe.log_error("error " + frappe.get_traceback())
         make_response(success=False, message=str(e))

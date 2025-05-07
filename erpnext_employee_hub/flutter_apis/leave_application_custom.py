@@ -16,7 +16,7 @@ from erpnext.hr.doctype.leave_application.leave_application import (
     get_leave_allocation_records,
     get_allocation_expiry_for_cf_leaves,
     get_leave_entries,
-    get_leave_approver,
+    # get_leave_approver,
     get_holidays,
 )
 
@@ -318,3 +318,16 @@ def get_leave_details(employee, date):
         "leave_approver": get_leave_approver(employee),
         "lwps": lwp,
     }
+
+
+def get_leave_approver(employee):
+    document = frappe.get_doc("Employee", employee)
+    leave_approver = document.leave_approver
+    if not leave_approver and document.department:
+        leave_approver = frappe.db.get_value(
+            "Department Approver",
+            {"parent": document.department, "parentfield": "leave_approvers", "idx": 1},
+            "approver",
+        )
+
+    return leave_approver

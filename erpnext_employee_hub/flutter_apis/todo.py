@@ -21,13 +21,13 @@ def get_user_todo():
             description,
             name, 
             priority,
-            allocated_to, 
-            owner AS allocated_by,
+            owner as allocated_to, 
+            assigned_by AS allocated_by,
             date,
             reference_type,
             reference_name
             FROM  `tabToDo`
-            WHERE owner = '{user_email}'  OR allocated_to = '{user_email}'
+            WHERE owner = '{user_email}'  OR assigned_by = '{user_email}'
             ORDER BY date DESC
             """,
             as_dict=True,

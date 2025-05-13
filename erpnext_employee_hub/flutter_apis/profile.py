@@ -14,7 +14,7 @@ def get_profile_data():
             data = (
                 frappe.db.get_value(
                     "Employee",
-                    {user_details.get("employee")},
+                    user_details.get("employee"),
                     [
                         "employee",
                         "date_of_joining",
@@ -60,7 +60,7 @@ def get_profile_data():
         else:
             make_response(success=False, message="Invalid user!")
     except Exception as e:
-        make_response(success=False, message=str(e))
+        make_response(success=False, message=str(e) + frappe.get_traceback())
 
 
 @frappe.whitelist()

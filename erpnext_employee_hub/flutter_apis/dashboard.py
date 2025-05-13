@@ -107,7 +107,7 @@ def get_dashboard_data():
 
             data_get_dict = {
                 # "current_task": f""" SELECT creation, priority, name as id, actual_time, expected_time, exp_end_date from `tabTask` where  1 = 1  ORDER BY creation desc""",
-                "pending_request": f"""SELECT ec.name as id, ec.status,expense_date, ecd.description, ecd.expense_type,ecd.amount from `tabExpense Claim` ec inner join `tabExpense Claim Detail` ecd on ec.name = ecd.parent where ec.docstatus=1 and MONTH(ec.posting_date) = {month}  and employee = '{user_details.employee}' """,
+                "pending_request": f"""SELECT ec.name as id, ec.status,expense_date, ecd.description, ecd.expense_type,ecd.amount from `tabExpense Claim` ec inner join `tabExpense Claim Detail` ecd on ec.name = ecd.parent where ec.docstatus=1 and MONTH(ec.posting_date) = {month}  and ec.employee = '{user_details.employee}' """,
                 "salary_details": f"""SELECT MONTHNAME(posting_date) as month_name,total_working_days,gross_pay from `tabSalary Slip` where 1 = 1 and MONTH(posting_date) = {month}  and employee = '{user_details.employee}' """,
             }
 

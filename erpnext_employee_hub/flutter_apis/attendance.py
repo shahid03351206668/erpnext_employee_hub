@@ -37,7 +37,7 @@ def get_attendance(filters=""):
 
             # main_checks = f""" select DATE(ec.time) as date, ec.employee, ({checkins}) as check_in, ({checkouts}) as check_out
             # from `tabEmployee Checkin` ec where ec.employee = '{user_details.get("employee")}' Group By DATE(ec.time), ec.employee Order By DATE(ec.time) DESC"""
-            
+
             data = frappe.db.sql(
                 f""" 
                 select
@@ -135,54 +135,83 @@ def add_leaves():
 def add_attendence():
     try:
         data = loads(frappe.request.data)
-        if data:
-            user_details = get_user_details()
-            doc = frappe.new_doc("Employee Checkin")
-            doc.employee = user_details.get("employee")
-            doc.log_type = data.get("type")
-            datetime_str = f"""{data.get('date')} {data.get('time')}"""
-            datetime_str = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S")
-            doc.time = datetime_str
-            doc.custom_location_name = data.get("location_name")
-            doc.device_id = data.get("location")
-            doc.custom_latitude = data.get("latitude")
-            doc.custom_longitude = data.get("longitude")
-            doc.save(ignore_permissions=True)
 
-            front_image = save_file(
-                data.get("front_image").get("name"),
-                data.get("front_image").get("base64"),
-                "Employee Checkin",
-                doc.name,
-                decode=True,
-                is_private=0,
-                df="custom_front_image",
-            )
+        if not data:
+            frappe.response["message"] = "Data not found"
+            return
 
-            rear_image = save_file(
-                data.get("rear_image").get("name"),
-                data.get("rear_image").get("base64"),
-                "Employee Checkin",
-                doc.name,
-                decode=True,
-                is_private=0,
-                df="custom_rear_image",
-            )
+        user_details = get_user_details()
+        doc = frappe.new_doc("Employee Checkin")
+        doc.employee = user_details.get("employee")
+        doc.log_type = data.get("type")
 
-            if rear_image.name and front_image.name:
-                frappe.db.set_value(
+        datetime_str = f"{data.get('date')} {data.get('time')}"
+        datetime_obj = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S")
+        doc.time = datetime_obj
+
+        doc.custom_location_name = data.get("location_name")
+        doc.device_id = data.get("location")
+        doc.custom_latitude = data.get("latitude")
+        doc.custom_longitude = data.get("longitude")
+        doc.save(ignore_permissions=True)
+
+        # Process front image if provided
+        front_image_data = data.get("front_image", {})
+        if front_image_data and isinstance(front_image_data, dict):
+            image_name = front_image_data.get("name")
+            image_base64 = front_image_data.get("base64")
+
+            if image_name and image_base64:
+                front_image = save_file(
+                    image_name,
+                    image_base64,
                     "Employee Checkin",
                     doc.name,
-                    {
-                        "custom_rear_image": rear_image.file_url,
-                        "custom_front_image": front_image.file_url,
-                    },
+                    decode=True,
+                    is_private=0,
+                    df="custom_front_image",
                 )
-                frappe.db.commit()
 
-            frappe.db.commit()
-            frappe.response["message"] = "Attendance added"
-        else:
-            frappe.response["message"] = "Data not found"
+                if hasattr(front_image, "file_url"):
+                    frappe.db.set_value(
+                        "Employee Checkin",
+                        doc.name,
+                        {
+                            "custom_front_image": front_image.file_url,
+                        },
+                    )
+                    frappe.db.commit()
+
+        # Process rear image if provided
+        rear_image_data = data.get("rear_image", {})
+        if rear_image_data and isinstance(rear_image_data, dict):
+            image_name = rear_image_data.get("name")
+            image_base64 = rear_image_data.get("base64")
+
+            if image_name and image_base64:
+                rear_image = save_file(
+                    image_name,
+                    image_base64,
+                    "Employee Checkin",
+                    doc.name,
+                    decode=True,
+                    is_private=0,
+                    df="custom_rear_image",
+                )
+
+                if hasattr(rear_image, "file_url"):
+                    frappe.db.set_value(
+                        "Employee Checkin",
+                        doc.name,
+                        {
+                            "custom_rear_image": rear_image.file_url,
+                        },
+                    )
+        frappe.db.commit()
+        frappe.response["message"] = "Attendance added"
+        return
+
     except Exception as e:
-        create_log("Api Failed", e)
+        error_msg = str(e)
+        frappe.response["message"] = f"Error adding attendance: {error_msg}"
+        return

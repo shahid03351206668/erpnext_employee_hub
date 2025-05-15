@@ -114,20 +114,21 @@ def get_dashboard_data():
             for field, query in data_get_dict.items():
                 data = frappe.db.sql(query, as_dict=1, debug=True)
                 data_get_dict[field] = data
-            data_get_dict["current_task"] = frappe.db.get_list(
-                "Task",
-                fields=[
-                    "creation",
-                    "priority",
-                    "name as id",
-                    "actual_time",
-                    "expected_time",
-                    "exp_end_date",
-                ],
-                order_by="creation desc",
-                page_length=100,
-                # as_dict=True,
-            )
+
+            if frappe.has_permission("Task", "read"):
+                data_get_dict["current_task"] = frappe.db.get_list(
+                    "Task",
+                    fields=[
+                        "creation",
+                        "priority",
+                        "name as id",
+                        "actual_time",
+                        "expected_time",
+                        "exp_end_date",
+                    ],
+                    order_by="creation desc",
+                    page_length=100,
+                )
 
             data_get_dict_counts = {
                 "attendance_present": f"""SELECT COUNT(name)from `tabAttendance` where status = 'Present' and MONTH(attendance_date) = {month} """,

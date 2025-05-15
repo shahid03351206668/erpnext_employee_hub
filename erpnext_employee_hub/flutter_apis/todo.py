@@ -55,7 +55,7 @@ def create_todo():
         todo_doc.description = data.get("description")
         todo_doc.priority = data.get("priority")
         todo_doc.allocated_to = data.get("allocated_to")
-        todo_doc.date = data.get("date")
+        todo_doc.date = frappe.utils.getdate(data.get("date"))
         # todo_doc.reference_type = data.get("reference_type")
         # todo_doc.reference_name = data.get("reference_name")
 

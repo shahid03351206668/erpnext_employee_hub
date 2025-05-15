@@ -141,6 +141,9 @@ def add_attendence():
             return
 
         user_details = get_user_details()
+        if not user_details:
+
+            return "login required"
         doc = frappe.new_doc("Employee Checkin")
         doc.employee = user_details.get("employee")
         doc.log_type = data.get("type")
@@ -161,7 +164,12 @@ def add_attendence():
             image_name = front_image_data.get("name")
             image_base64 = front_image_data.get("base64")
 
-            if image_name and image_base64:
+            if (
+                image_name
+                and image_base64
+                and image_base64 != "N/A"
+                and image_name != "N/A"
+            ):
                 front_image = save_file(
                     image_name,
                     image_base64,
@@ -188,7 +196,12 @@ def add_attendence():
             image_name = rear_image_data.get("name")
             image_base64 = rear_image_data.get("base64")
 
-            if image_name and image_base64:
+            if (
+                image_name
+                and image_base64
+                and image_name != "N/A"
+                and image_base64 != "N/A"
+            ):
                 rear_image = save_file(
                     image_name,
                     image_base64,
@@ -213,5 +226,7 @@ def add_attendence():
 
     except Exception as e:
         error_msg = str(e)
-        frappe.response["message"] = f"Error adding attendance: {error_msg}"
+        frappe.response["message"] = (
+            f"Error adding attendance: {error_msg}" + frappe.get_traceback()
+        )
         return

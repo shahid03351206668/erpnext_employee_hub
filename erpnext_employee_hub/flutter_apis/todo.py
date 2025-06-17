@@ -5,6 +5,8 @@ import re
 
 
 def striphtml(data):
+    if not data:
+        data = ""
     p = re.compile(r"<.*?>")
     return p.sub("", data)
 

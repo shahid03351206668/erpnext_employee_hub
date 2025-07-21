@@ -4,6 +4,44 @@ from frappe.utils import cstr, cint, flt, getdate
 from .main import create_log, make_response, get_user_details
 from frappe.utils.file_manager import save_file
 from json import loads
+import calendar
+
+
+
+def get_month_dates():
+    year = datetime.now().year
+    month = datetime.now().month
+    _, num_days = calendar.monthrange(year, month)
+    start_date = datetime(year, month, 1).date()
+    end_date = datetime(year, month, num_days).date()
+    return str(start_date), str(end_date)
+
+
+@frappe.whitelist()
+def get_employee_attendance(
+    employee=None,
+    start_date=None,
+    end_date=None,
+):
+    if not employee:
+        frappe.response["message"] = "Employee is required"
+        return
+
+    sql_conds = ""
+
+    if not end_date:
+        end_date = get_month_dates()[1]
+
+    if not start_date:
+        start_date = get_month_dates()[0]
+    sql_conds += f""" AND attendance_date >= '{start_date}' """
+    sql_conds += f""" AND attendance_date <= '{end_date}' """
+
+    attendance_data = frappe.db.sql(
+        f"SELECT *  FROM `tabAttendance` WHERE employee = {employee} {sql_conds} ORDER BY attendance_date DESC",
+        as_dict=1,
+    )
+    frappe.response["data"] = attendance_data
 
 
 @frappe.whitelist()
@@ -142,7 +180,6 @@ def add_attendence():
 
         user_details = get_user_details()
         if not user_details:
-
             return "login required"
         doc = frappe.new_doc("Employee Checkin")
         doc.employee = user_details.get("employee")

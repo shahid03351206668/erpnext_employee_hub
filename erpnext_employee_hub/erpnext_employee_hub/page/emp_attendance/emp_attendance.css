@@ -1,0 +1,116 @@
+#db-content {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.col-md-12.layout-main-section-wrapper {
+    margin-bottom: 0 !important;
+}
+
+.table-overflow__wrapper {
+    overflow-x: scroll;
+}
+
+.table-overflow__wrapper {
+    /* border: 2px solid lightgray; */
+}
+
+.table-overflow__wrapper table {
+    background-color: #FFF;
+}
+
+.checkin-employeeCard {
+    display: flex;
+    align-items: center;
+    width: 250px;
+    gap: .5rem;
+    border-radius: 2rem;
+    /* border: 1px solid lightgrey; */
+    padding: .25rem .5rem;
+}
+
+.checkin-employeeCard img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid lightgrey;
+}
+
+.checkin-logCard {
+    width: 250px;
+    font-size: .75rem;
+    border: 1px solid lightgrey;
+    box-shadow: 0 0 3px lightgray;
+    padding: .5rem;
+    border-radius: .45rem;
+}
+
+.checkin-logCard .btn.btn-primary {
+    background-color: #0a6bc1;
+}
+
+.checkin-logCard__title {
+    font-size: .75rem;
+    border-bottom: 2px solid lightgrey;
+    /* padding-block: .25rem;
+    margin-bottom: .25rem; */
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+
+
+}
+
+.checkin-logCard__images {
+    display: flex;
+    margin-top: .5rem;
+    gap: .5rem;
+}
+
+.checkin-logCard__images div {
+    flex-basis: 100%;
+}
+
+.checkin-logCard__images div img {
+    height: 75px;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+
+.checkin-logCard__shift {}
+
+.checkin-logCard__time {
+    flex-basis: 100%;
+}
+
+.checkin-logCard__upper {
+    min-height: 80px;
+}
+
+
+.table-overflow__wrapper table th,
+.table-overflow__wrapper table td {
+    padding: .25rem !important;
+}
+
+
+.log-card__images img {
+    height: inherit;
+    max-width: 120px;
+    object-fit: contain;
+}
+
+.log-card__images {
+    display: flex;
+    gap: 1rem;
+    height: 108px;
+    overflow: hidden;
+    padding: .5rem;
+}
+.checkin-logCard-wrapper {
+    display: flex;
+}

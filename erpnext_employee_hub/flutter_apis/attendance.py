@@ -137,6 +137,9 @@ def add_attendence():
         data = loads(frappe.request.data)
         if data:
             user_details = get_user_details()
+            if not user_details:
+                make_response(success=False, message="login required!", data={}, session_success=False)
+                return
             doc = frappe.new_doc("Employee Checkin")
             doc.employee = user_details.get("employee")
             doc.log_type = data.get("type")

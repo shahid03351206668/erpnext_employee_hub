@@ -1,7 +1,21 @@
-// Copyright (c) 2024, CodesSoft and contributors
-// For license information, please see license.txt
-
 frappe.ui.form.on('Attendance Location', {
+    refresh(frm) { },
+
+    map(frm) {
+        const { map } = frm.doc;
+        try {
+            const coordinates = JSON.parse(map).features[0].geometry.coordinates;
+            const lat = coordinates[0];
+            const lng = coordinates[1];
+
+            frm.set_value("latitude", lat);
+            frm.set_value("longitude", lng);
+
+        } catch (error) {
+
+        }
+    },
+
     get_employees: function (frm) {
         let filters = {
             "employee": frm.doc.employee || null,
@@ -11,7 +25,7 @@ frappe.ui.form.on('Attendance Location', {
         };
 
         frappe.call({
-            method: 'erpnext_employee_hub.erpnext_employee_hub.doctype.attendance_location.attendance_location.get_employee_data',
+            method: 'kace.kace.doctype.attendance_location.attendance_location.get_employee_data',
             freeze: true,
             args: { "filters": filters },
             callback: function (response) {
@@ -26,6 +40,5 @@ frappe.ui.form.on('Attendance Location', {
                 }
             }
         });
-
     }
 });

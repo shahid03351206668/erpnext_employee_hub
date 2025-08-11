@@ -1,4 +1,4 @@
-from erpnext_employee_hub.notification_log_custom import NotificationLog
+# from erpnext_employee_hub.notification_log_custom import NotificationLog
 
 app_name = "erpnext_employee_hub"
 app_title = "ERPNext Employee Hub"
@@ -145,10 +145,10 @@ doc_events = {
 	# 	"on_cancel": "method",
 	# 	"on_trash": "method"
 	# }
-  "Notification Log": {
-        "after_insert": "erpnext_employee_hub.main.send_notification_log",
-        "validate": "erpnext_employee_hub.main.send_notification_log",
-    },
+#   "Notification Log": {
+#         "after_insert": "erpnext_employee_hub.main.send_notification_log",
+#         "validate": "erpnext_employee_hub.main.send_notification_log",
+#     },
 }
 
 # Scheduled Tasks

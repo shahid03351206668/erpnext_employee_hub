@@ -1,12 +1,25 @@
-import frappe
-from frappe.utils import cstr, cint, flt, getdate, now
-from frappe.utils.file_manager import save_file
-
-from datetime import datetime
-import requests
 import json
 import re
+from datetime import datetime
+
+import frappe
+import requests
+from frappe.utils import cint, cstr, flt, getdate, now
 from frappe.utils.file_manager import save_file
+
+
+def get_user_language() -> str:
+    system_language = frappe.db.get_value(
+        "System Settings", "System Settings", "language"
+    )
+    user_language = frappe.db.get_value("User", frappe.session.user, "language")
+    if not user_language:
+        return system_language or "en"
+
+    if user_language != system_language:
+        return user_language
+
+    return system_language
 
 
 def create_log(title="App Api", message=""):
@@ -15,6 +28,7 @@ def create_log(title="App Api", message=""):
 
 def make_response(success=True, message="Success", data={}, session_success=True):
     frappe.local.response["message"] = {
+        "user": get_user_details(),
         "session_success": session_success,
         "success": success,
         "success_key": cint(success),
@@ -29,11 +43,19 @@ def get_user_details(user=None):
             user = frappe.session.user
         if user and user not in ["Guest"]:
             employee = frappe.db.get_value("Employee", {"user_id": user}, "name")
+            if employee is None or employee == "":
+                return make_response(
+                    success=False,
+                    message="No employee found against this user!",
+                    session_success=False,
+                )
+
             # sales_person = frappe.db.get_value("Sales Person", {"user": user, "enabled": 1}, "name")
             user = frappe.get_doc("User", user)
             data = {
                 "name": user.name,
                 "sid": frappe.session.sid,
+                "language": get_user_language(),
                 "username": user.username,
                 "email": user.email,
                 "employee": employee,

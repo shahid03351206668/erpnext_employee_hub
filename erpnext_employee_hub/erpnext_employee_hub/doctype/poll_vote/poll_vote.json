@@ -48,7 +48,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-30 22:37:11.157801",
+ "modified": "2025-03-20 10:13:27.946967",
  "modified_by": "Administrator",
  "module": "ERPNext Employee Hub",
  "name": "Poll Vote",
@@ -63,6 +63,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
    "share": 1,
    "write": 1
   }

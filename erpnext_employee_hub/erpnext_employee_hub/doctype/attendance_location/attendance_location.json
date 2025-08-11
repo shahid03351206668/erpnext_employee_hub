@@ -8,10 +8,12 @@
  "field_order": [
   "location_details_section",
   "location_name",
+  "latitude",
   "longitude",
   "column_break_ossa",
-  "latitude",
   "meters",
+  "section_break_hynd",
+  "map",
   "filters_section",
   "employee",
   "branch",
@@ -106,11 +108,19 @@
   {
    "fieldname": "column_break_fmzo",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_hynd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "map",
+   "fieldtype": "Geolocation"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-30 22:44:59.993589",
+ "modified": "2025-06-03 18:19:51.265977",
  "modified_by": "Administrator",
  "module": "ERPNext Employee Hub",
  "name": "Attendance Location",
@@ -126,6 +136,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
    "share": 1,
    "write": 1
   }

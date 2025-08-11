@@ -129,7 +129,7 @@ def get_dashboard_data():
                     "exp_end_date",
                 ],
                 order_by="creation desc",
-                page_length=100,
+                page_length=1,
                 # as_dict=True,
             )
 

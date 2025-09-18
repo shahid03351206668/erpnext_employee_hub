@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import frappe
-from typing import Dict, Optional, Tuple
+
+# from typing import Dict, Optional, Tuple
 from frappe import _
 from frappe.utils import (
     cint,
@@ -23,16 +24,16 @@ from hrms.hr.doctype.leave_application.leave_application import (
 
 @frappe.whitelist()
 def get_number_of_leave_days(
-    employee: str,
-    leave_type: str,
-    from_date: str,
-    to_date: str,
-    half_day: Optional[int] = None,
-    half_day_date: Optional[str] = None,
-    holiday_list: Optional[str] = None,
-    hourly_leave: Optional[str] = None,
+    employee,
+    leave_type,
+    from_date,
+    to_date,
+    half_day,
+    half_day_date,
+    holiday_list,
+    hourly_leave,
     hours=0,
-) -> float:
+):
     """Returns number of leave days between 2 dates after considering half day and holidays
     (Based on the include_holiday setting in Leave Type)"""
     number_of_days = 0
@@ -79,9 +80,7 @@ def get_number_of_leave_days(
     return number_of_days
 
 
-def get_remaining_leaves(
-    allocation: Dict, leaves_taken: float, date: str, cf_expiry: str
-) -> Dict[str, float]:
+def get_remaining_leaves(allocation, leaves_taken, date, cf_expiry):
     """Returns a dict of leave_balance and leave_balance_for_consumption
     leave_balance returns the available leave balance
     leave_balance_for_consumption returns the minimum leaves remaining after comparing with remaining days for allocation expiry
@@ -130,9 +129,7 @@ def get_remaining_leaves(
     )
 
 
-def get_new_and_cf_leaves_taken(
-    allocation: Dict, cf_expiry: str
-) -> Tuple[float, float]:
+def get_new_and_cf_leaves_taken(allocation, cf_expiry):
     """returns new leaves taken and carry forwarded leaves taken within an allocation period based on cf leave expiry"""
     cf_leaves_taken = get_leaves_for_period(
         allocation.employee, allocation.leave_type, allocation.from_date, cf_expiry

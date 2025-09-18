@@ -15,58 +15,30 @@ from json import loads
 
 
 def get_attendance_data(employee, st_date, ed_date):
-    query_conds = f""" and  DATE(time) >= '{st_date}' and  DATE(time) <= '{ed_date}' """
-    # datetime.date()
-    # frappe.throw(f"{st_date} , {ed_date}")
-    checkins = frappe.db.sql(
-        f""" 
-		select
-			DATE (ec.time) as date,
-			ec.employee,
-			(
-				select
-					time
-				from
-					`tabEmployee Checkin`
-				where
-					log_type = "IN"
-					and employee = ec.employee
-					and DATE (time) = DATE (ec.time)
-				Order BY
-					time ASC
-				limit
-					1
-			) as check_in,
-			(
-				select
-					time
-				from
-					`tabEmployee Checkin`
-				where
-					log_type = "OUT"
-					and employee = ec.employee
-					and DATE (time) = DATE (ec.time)
-				Order BY
-					time DESC
-				limit
-					1
-			) as check_out
-		from
-			`tabEmployee Checkin` ec
-		where
-			ec.employee = '{employee}'
-			{query_conds}
-		Group By
-			DATE (ec.time),
-			ec.employee
-		Order By
-			DATE (ec.time) DESC """,
-        as_dict=1,
+    sql_conditions = (
+        f""" AND attendance_date >= '{st_date}' and  attendance_date <= '{ed_date}' """
     )
-    presents = len([i for i in checkins if i.get("check_in") or i.get("check_out")])
+    attendances = frappe.db.sql(
+        f""" 
+        SELECT 
+            employee,
+            in_time,
+            out_time,
+            status
+        FROM `tabAttendance`
+        WHERE employee = '{employee}' {sql_conditions}
+        AND docstatus = 1
+        GROUP BY attendance_date, employee
+        ORDER BY attendance_date DESC
+
+    """,
+        as_dict=True,
+    )
+
+    presents = len([i for i in attendances if i.get("status") == "Present"])
 
     response = {
-        "Absent": len(checkins) - presents,
+        "Absent": len([i for i in attendances if i.get("status") == "Absent"]),
         "Present": presents,
         "Total": monthrange(
             cint(datetime.now().strftime("%Y")),
@@ -74,9 +46,6 @@ def get_attendance_data(employee, st_date, ed_date):
         )[1],
     }
 
-    # if st_date and ed_date:
-
-    response["Absent"] = response["Total"] - response["Present"]
 
     return response
 
@@ -175,7 +144,7 @@ def get_dashboard_data():
             }
 
             current_shift = frappe.db.sql(
-                f"""  SELECT start_time, end_time,name  FROM `tabShift Type` where name = '{frappe.db.get_value("Employee",user_details.get("employee"), "default_shift")}' """,
+                f"""  SELECT start_time, end_time,name  FROM `tabShift Type` where name = '{frappe.db.get_value("Employee", user_details.get("employee"), "default_shift")}' """,
                 as_dict=True,
             )
 

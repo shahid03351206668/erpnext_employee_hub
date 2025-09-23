@@ -46,7 +46,6 @@ def get_attendance_data(employee, st_date, ed_date):
         )[1],
     }
 
-
     return response
 
 
@@ -87,19 +86,29 @@ def get_dashboard_data():
             for field, query in data_get_dict.items():
                 data = frappe.db.sql(query, as_dict=1, debug=True)
                 data_get_dict[field] = data
+
             data_get_dict["current_task"] = frappe.db.get_list(
                 "Task",
                 fields=[
-                    "creation",
+                    "name",
+                    "status",
                     "priority",
-                    "name as id",
-                    "actual_time",
-                    "expected_time",
+                    "subject",
+                    "project",
+                    "exp_start_date",
                     "exp_end_date",
+                    "expected_time",
+                    "progress",
+                    "issue",
+                    "type",
+                    "completed_by",
+                    "completed_on",
+                    "description",
+                    "_assign",
                 ],
                 order_by="creation desc",
                 page_length=1,
-                # as_dict=True,
+                limit=1,
             )
 
             data_get_dict_counts = {

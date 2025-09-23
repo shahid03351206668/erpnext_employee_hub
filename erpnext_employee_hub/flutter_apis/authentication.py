@@ -5,23 +5,34 @@ from .main import create_log, make_response, get_user_details
 
 @frappe.whitelist(allow_guest=True)
 def login(usr, pwd):
-    try:
-        login_manager = frappe.auth.LoginManager()
-        login_manager.authenticate(user=usr, pwd=pwd)
-        login_manager.post_login()
-        user_details = get_user_details()
-        if user_details:
-            make_response(
-                success=True,
-                message="Authentication success",
-                data=user_details,
-            )
-    except Exception as e:
-        create_log("API Test", f"{e}\n{frappe.get_traceback()}")
-        make_response(success=False, message="Invalid login credentials!")
+    login_manager = frappe.auth.LoginManager()
+    login_manager.authenticate(user=usr, pwd=pwd)
+    login_manager.post_login()
+
+    frappe.response["message"] = {}
+    frappe.response["message"]["data"] = get_user_details()
+    frappe.response["message"]["success"] = True
+    frappe.response["message"]["version"] =  "15"
+
+
+    # except Exception:
+    #     frappe
+    # user_details = get_user_details()
+
+    # if user_details:
+    #     make_response(
+    #         success=True,
+    #         message="Authentication success",
+    #         data=user_details,
+    #     )
+    # except Exception:
+    #     make_response(success=False, message="Invalid login credentials!")
+
 
 @frappe.whitelist(allow_guest=True)
-def create_user(email, pwd, username, name=None, location=None, territory=None, phone=None):
+def create_user(
+    email, pwd, username, name=None, location=None, territory=None, phone=None
+):
     try:
         user_doc = frappe.new_doc("User")
         user_doc.flags.ignore_permissions = True
@@ -38,7 +49,7 @@ def create_user(email, pwd, username, name=None, location=None, territory=None, 
         if location:
             user_doc.location = location
         user_doc.send_welcome_email = 0
-        user_doc.append("roles", {"role":"Customer"})
+        user_doc.append("roles", {"role": "Customer"})
         user_doc.save()
         if user_doc.name:
             frappe.db.commit()
@@ -47,6 +58,7 @@ def create_user(email, pwd, username, name=None, location=None, territory=None, 
             make_response(success=False, message="Failed to create user!")
     except Exception as e:
         make_response(success=False, message=str(e))
+
 
 @frappe.whitelist()
 def update_user(name=None, location=None, territory=None, phone=None):
@@ -94,4 +106,3 @@ def change_pass(old_password=None, new_password=None):
     except Exception as e:
         create_log("Failed to change Password", e)
         make_response(success=False, message=e)
-

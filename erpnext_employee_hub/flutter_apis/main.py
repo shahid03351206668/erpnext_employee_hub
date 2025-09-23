@@ -41,35 +41,48 @@ def get_user_details(user=None):
     try:
         if not user:
             user = frappe.session.user
+
         if user and user not in ["Guest"]:
             employee = frappe.db.get_value("Employee", {"user_id": user}, "name")
             if employee is None or employee == "":
-                return make_response(
-                    success=False,
-                    message="No employee found against this user!",
-                    session_success=False,
-                )
+                frappe.local.response["message"] = {
+                    "user": None,
+                    "session_success": False,
+                    "success": False,
+                    "message": "No employee found against this user!",
+                }
 
-            # sales_person = frappe.db.get_value("Sales Person", {"user": user, "enabled": 1}, "name")
             user = frappe.get_doc("User", user)
             data = {
+                "full_name": user.full_name,
                 "name": user.name,
                 "sid": frappe.session.sid,
+                "version": "15",
                 "language": get_user_language(),
                 "username": user.username,
                 "email": user.email,
-                "employee": employee,
                 "user_image": user.user_image,
+                "success": True,
+                "employee": employee,
                 # "sales_person": sales_person,
             }
             return frappe._dict(data)
         else:
-            make_response(
-                success=False, message="Session Not Found.", session_success=False
-            )
-    except Exception as e:
-        create_log("API Test", f"{e}\n{frappe.get_traceback()}")
-        make_response(success=False, message="Invalid login credentials!")
+            frappe.local.response["message"] = {
+                "user": None,
+                "session_success": False,
+                "success": False,
+                "message": "Session not found",
+            }
+            return
+    except Exception:
+        frappe.local.response["message"] = {
+            "user": None,
+            "session_success": False,
+            "success": False,
+            "message": "Invalid login credentials!",
+            "data": data,
+        }
 
 
 def get_date_time_to_use():

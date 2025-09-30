@@ -18,25 +18,31 @@ def get_attendance_data(employee, st_date, ed_date):
     sql_conditions = (
         f""" AND attendance_date >= '{st_date}' and  attendance_date <= '{ed_date}' """
     )
-    attendances = frappe.db.sql(
-        f""" 
-        SELECT 
-            employee,
-            in_time,
-            out_time,
-            status
-        FROM `tabAttendance`
-        WHERE employee = '{employee}' {sql_conditions}
-        AND docstatus = 1
-        GROUP BY attendance_date, employee
-        ORDER BY attendance_date DESC
+    # attendances = frappe.db.sql(
+    #     f""" 
+    #     SELECT 
+    #         employee,
+    #         in_time,
+    #         out_time,
+    #         status
+    #     FROM `tabAttendance`
+    #     WHERE employee = '{employee}' {sql_conditions}
+    #     AND docstatus = 1
+    #     GROUP BY attendance_date, employee
+    #     ORDER BY attendance_date DESC
 
-    """,
-        as_dict=True,
-    )
+    # """,
+    #     as_dict=True,
+    #     debug=True
+    # )
+    # attendance_date >= '2025-09-01' and  attendance_date <= '2025-09-30' 
+
+    attendances = frappe.get_all("Attendance", fields=["employee","in_time","out_time","status"], filters=[
+    ["attendance_date", ">=",st_date],
+    ["attendance_date", "<=",ed_date],
+    ])
 
     presents = len([i for i in attendances if i.get("status") == "Present"])
-
     response = {
         "Absent": len([i for i in attendances if i.get("status") == "Absent"]),
         "Present": presents,
@@ -84,7 +90,7 @@ def get_dashboard_data():
             }
 
             for field, query in data_get_dict.items():
-                data = frappe.db.sql(query, as_dict=1, debug=True)
+                data = frappe.db.sql(query, as_dict=True)
                 data_get_dict[field] = data
 
             data_get_dict["current_task"] = frappe.db.get_list(
@@ -112,13 +118,13 @@ def get_dashboard_data():
             )
 
             data_get_dict_counts = {
-                "attendance_present": f"""SELECT COUNT(name)from `tabAttendance` where status = 'Present' and MONTH(attendance_date) = {month} """,
-                "attendance_absent": f"""SELECT COUNT(name) from `tabAttendance` where status = 'Absent' and MONTH(attendance_date) = {month} """,
+                # "attendance_present": f"""SELECT COUNT(name)from `tabAttendance` where status = 'Present' and MONTH(attendance_date) = {month} """,
+                # "attendance_absent": f"""SELECT COUNT(name) from `tabAttendance` where status = 'Absent' and MONTH(attendance_date) = {month} """,
             }
-            for field, query in data_get_dict_counts.items():
-                data = frappe.db.sql(query)
-                if data:
-                    data_get_dict[field] = data[0][0]
+            # for field, query in data_get_dict_counts.items():
+            #     data = frappe.db.sql(query)
+            #     if data:
+            #         data_get_dict[field] = data[0][0]
 
             data_get_dict["leave_balance"] = [
                 {

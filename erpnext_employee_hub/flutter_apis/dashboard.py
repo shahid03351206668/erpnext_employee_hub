@@ -40,6 +40,8 @@ def get_attendance_data(employee, st_date, ed_date):
     attendances = frappe.get_all("Attendance", fields=["employee","in_time","out_time","status"], filters=[
     ["attendance_date", ">=",st_date],
     ["attendance_date", "<=",ed_date],
+    ["docstatus", "=", 1],
+    ["employee", "=", employee]
     ])
 
     presents = len([i for i in attendances if i.get("status") == "Present"])

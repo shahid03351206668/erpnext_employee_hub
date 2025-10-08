@@ -146,7 +146,9 @@ def subscribe_notifications(user_id, device_token, unsubscribe=False):
             f""" SELECT name, device_token FROM `tabNotifications Subscriptions` WHERE user_id = '{user_id}' AND device_token = {frappe.db.escape(device_token)}  """
         )
         if subcription:
-            frappe.delete_doc("Notifications Subscriptions", subcription[0][0])
+            doc = frappe.get_doc("Notifications Subscriptions", subcription[0][0])
+            doc.flags.ignore_permissions = True
+            doc.delete()
             frappe.db.commit()
             frappe.response["message"] = "Unsubcribe successfully"
         else:
@@ -159,14 +161,16 @@ def subscribe_notifications(user_id, device_token, unsubscribe=False):
 
         if old_subcriptions:
             record = old_subcriptions[0][0]
-            frappe.delete_doc("Notifications Subscriptions", record)
+            doc = frappe.get_doc("Notifications Subscriptions", record)
+            doc.flags.ignore_permissions = True
+            doc.delete()
             frappe.db.commit()
 
         subscription_doc = frappe.new_doc("Notifications Subscriptions")
         subscription_doc.user_id = user_id
         subscription_doc.device_token = device_token
         subscription_doc.flags.ignore_permissions = True
-        subscription_doc.save()
+        subscription_doc.insert()
         frappe.db.commit()
         frappe.response["message"] = "Subcribe successfully"
 

@@ -145,10 +145,10 @@ doc_events = {
 	# 	"on_cancel": "method",
 	# 	"on_trash": "method"
 	# }
-#   "Notification Log": {
-#         "after_insert": "erpnext_employee_hub.main.send_notification_log",
-#         "validate": "erpnext_employee_hub.main.send_notification_log",
-#     },
+   "Notification Log": {
+         "after_insert": "erpnext_employee_hub.main.send_notification_log",
+         "validate": "erpnext_employee_hub.main.send_notification_log",
+     },
 }
 
 # Scheduled Tasks

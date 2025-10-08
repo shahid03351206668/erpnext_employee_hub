@@ -33,7 +33,7 @@ def get_access_token():
             "assertion": signed_jwt,
         },
     )
-
+    frappe.log_error("firebase access token log ", str(response.text))
     if response.ok:
         # frappe.log_error(str(response.json()), "Oauth Res")
         return response.json().get("access_token")
@@ -50,8 +50,6 @@ def send_notification_log(self, method=None):
             filters={"user_id": self.for_user},
             pluck="device_token",
         )
-
-        # frappe.log_error(str(device_tokens), "Device Tokens")
 
         if not device_tokens:
             return

@@ -16,7 +16,7 @@ def create_log(title="App Api", message=""):
 def make_response(success=True, message="Success", data={}, session_success=True):
     frappe.local.response["message"] = {
         "session_success": session_success,
-        "version": erpnext.__version__,
+        "version": "13",
         "success": success,
         "success_key": cint(success),
         "message": message,

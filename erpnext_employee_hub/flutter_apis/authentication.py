@@ -20,6 +20,7 @@ def login(usr, pwd):
             return
 
         if user_details:
+            user_details["version"] =  "13"
             make_response(
                 success=True,
                 message="Authentication success",
@@ -107,3 +108,4 @@ def change_pass(old_password=None, new_password=None):
     except Exception as e:
         create_log("Failed to change Password", e)
         make_response(success=False, message=e)
+

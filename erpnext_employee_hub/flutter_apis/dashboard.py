@@ -159,6 +159,14 @@ def get_dashboard_data():
                     cint(datetime.now().strftime("%m")),
                 )[1],
             }
+            
+            mandatory_images = frappe.db.get_value(
+                "ERPNext Employee Hub Settings",
+                "ERPNext Employee Hub Settings",
+                "mandatory_images",
+            )
+
+            data_get_dict["attendance_mandatory_images"] = mandatory_images
 
             current_shift = frappe.db.sql(
                 f"""  SELECT start_time, end_time,name  FROM `tabShift Type` where name = '{frappe.db.get_value("Employee", user_details.get("employee"), "default_shift")}' """,
